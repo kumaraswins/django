@@ -27,6 +27,10 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api-token-auth/', views.obtain_auth_token),
     re_path(r'^$', RedirectView.as_view(url='admin/', permanent=True)),
+    #url(r'^api/company/$', mu_views.get_company, name='get_company'),
+    url(r'^api/company/$', (mu_views.all_visits))
+    #re_path('^visits$', views.all_visits),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

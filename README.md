@@ -19,7 +19,6 @@ $ source name/bin/activate
 ```
 
 Install pqsl, run the following command after logged into the psql console
-
 ```sh
 CREATE DATABASE project;
 CREATE ROLE project WITH LOGIN PASSWORD 'password';
@@ -77,7 +76,7 @@ In the browser open http://localhost:8000/admin/
 
 ### Home page
 ![](sample.png)
-### Todos
+### <span style="color:orange">Todos</span>
 
  - Write Ansible scripts to deploy in the cloud
  - Tie this app with mgunicorn

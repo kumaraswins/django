@@ -5,6 +5,11 @@ from django.views.generic import DetailView, RedirectView, UpdateView
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import viewsets, status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.http import JsonResponse
+
+
 from . import models, serializers
 
 User = get_user_model()
@@ -56,3 +61,10 @@ class CompanyViewSet(viewsets.ModelViewSet):
     queryset = models.Company.objects.all()
     serializer_class = serializers.CompanySerializer
     # lookup_field = 'name'
+
+
+@api_view(http_method_names=['GET'])
+def all_visits(request):
+    company = models.Company.objects.all()
+    serialized_company = {"data": serializers.CompanySerializer(company, many=True).data}
+    return JsonResponse(serialized_company, safe=False)
