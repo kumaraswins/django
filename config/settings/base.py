@@ -72,7 +72,6 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "rest_framework",
     "rest_framework.authtoken",
-    "users.apps.SuitConfig",
     "django.contrib.admin",
 ]
 

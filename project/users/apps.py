@@ -1,6 +1,5 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
-from suit.apps import DjangoSuitConfig
 
 class UsersConfig(AppConfig):
     name = "project.users"
@@ -12,7 +11,3 @@ class UsersConfig(AppConfig):
         except ImportError:
             pass
 
-
-
-class SuitConfig(DjangoSuitConfig):
-    layout = 'vertical'
