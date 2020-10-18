@@ -2,11 +2,19 @@
 
 ### Tech Used
 
-1. Python 3
-2. Django 2.2.9
-3. DB Mysql
+1. Python3
+2. DB Mysql
+3. venv
+4. django
+5. django restframework
 
 # Installation of requirements
+
+If you are not using `venv` for virtual environments, try installing 
+
+```bash
+python3 -m pip install --user virtualenv
+```
 
 ### Create Virtual environment and activate
 
@@ -20,22 +28,24 @@ source virtual_env/bin/activate
 Navigate to the cloned directory 
 
 ```bash
-pip install -r requirements/local.txt
+pip3 install -r requirements/local.txt
 ```
 
 ---
 
 # Create Database & Env file
 
-Inside the root folder we can see the file `db_create.sh` where in it will create the database and user name `django` 
+Inside the root folder we can see the file `create_db_env.sh` where in it will create the database and user name `django` .
+
+It will prompt for your username and password, please provide your `root` user and `password`
 
 ```bash
-bash db_create.sh
+bash create_db_env.sh
 ```
 
  it will prompt for your mysql password, pls enter your password.
 
-Finally it will create an .env file and load the env files
+Finally it will create an .`env` file and load the env files
 
 ```bash
 export DJANGO_READ_DOT_ENV_FILE=True
@@ -49,46 +59,35 @@ Make sure all your migrations are applied
 
 Seed the database with user and default user
 
+`seed_db` command will do `makemigrations` , `migrate` & as well populate DB with the default data
+
 ```bash
-python3 manage.py makemigrations --settings=config.settings.local
-python3 manage.py migrate --settings=config.settings.local
 python3 manage.py seed_db --settings=config.settings.local
 python3 manage.py runserver --settings=config.settings.local
 ```
 
+---
+
 # API documentation
 
-1. Login
+### 1. Create new entry
 
 ```bash
-curl --request POST 'http://localhost:8000/api-token-auth/' \
---form 'username=admin' \
---form 'password=password' | json_pp
+curl --location --request POST 'http://localhost:8000/member/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "first_name":"Test",
+    "last_name":"test",
+    "email":"test@gmail.com",
+    "phone":"9884080111",
+    "role":"Admin"
+}' | json_pp
 ```
 
-Success response, save the token for future request authentication
+### 2. List all the members
 
 ```bash
-{"token":"{{TOKEN}}"}
-```
-
-Store the token value
-
-```bash
-export TOKEN={{TOKEN}}
-```
-
-Failure response
-
-```bash
-{"non_field_errors":["Unable to log in with provided credentials."]}
-```
-
-2. List all the members
-
-```bash
-curl --location --request GET 'http://localhost:8000/member/' \
---header 'Authorization: Bearer '$TOKEN | json_pp
+curl --request GET 'http://localhost:8000/member/' | json_pp
 ```
 
 Success response 
@@ -116,11 +115,10 @@ Success response
 ]
 ```
 
-3. List specific User
+### 3. List specific member
 
 ```bash
-curl --location --request GET 'http://localhost:8000/member/1' \
---header 'Authorization: Bearer '$TOKEN | json_pp
+curl --request GET 'http://localhost:8000/member/1' | json_pp
 ```
 
 Response
@@ -137,22 +135,7 @@ Response
 }
 ```
 
-4. Create new entry
-
-```bash
-curl --location --request POST 'http://localhost:8000/member/' \
---header 'Authorization: Bearer '$TOKEN \
---header 'Content-Type: application/json' \
---data-raw '{
-    "first_name":"Test",
-    "last_name":"test",
-    "email":"test@gmail.com",
-    "phone":"9884080111",
-    "role":"Admin"
-}' | json_pp
-```
-
-5. Edit entry
+### 4. Edit entry
 
 Give any of the following field
 
@@ -168,20 +151,17 @@ Give any of the following field
 
 ```bash
 
-curl --location --request PUT 'http://localhost:8000/member/3/' \
+curl --request PUT 'http://localhost:8000/member/2/' \
 --header 'Content-Type: application/json' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer '$TOKEN \
 --data-raw '{
     "first_name": "Ashwath",
     "last_name": "kumar"
 }'
 ```
 
-6. Delete enrty
+### 5. Delete entry
 
 ```bash
-curl --location --request DELETE 'http://localhost:8000/member/1/' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer '$TOKEN
+curl --request DELETE 'http://localhost:8000/member/1/' \
+--header 'Content-Type: application/json'
 ```
