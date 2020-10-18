@@ -5,7 +5,6 @@
 1. Python 3
 2. Django 2.2.9
 3. DB Mysql
-4. JWT token authentication.
 
 # Installation of requirements
 

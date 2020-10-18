@@ -8,7 +8,6 @@ from rest_framework import routers
 from rest_framework.authtoken import views
 from django.urls import  re_path,path
 from project.users import views as mu_views
-from rest_framework_jwt.views import obtain_jwt_token
 
 from django.views.generic import RedirectView
 from django.views.decorators.csrf import csrf_exempt
@@ -23,8 +22,8 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path('', include(router.urls)),
 
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api-token-auth/', obtain_jwt_token),
+    #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    #url(r'^api-token-auth/', obtain_jwt_token),
     re_path(r'^$', RedirectView.as_view(url='admin/', permanent=True)),
 
 
