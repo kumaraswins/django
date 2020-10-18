@@ -22,5 +22,9 @@ class UserAdmin(auth_admin.UserAdmin):
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ('name', 'location',)
 
+@admin.register(models.Member)
+class MemberAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.site_header = 'Project'
 admin.site.site_title = 'Project'

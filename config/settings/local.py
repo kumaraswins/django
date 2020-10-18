@@ -7,9 +7,10 @@ from .base import env
 DEBUG = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env(
-    "DJANGO_SECRET_KEY",
-    default="WLPxHX7XqSnutd8JpLvwhaEu86294Qp5HDxaYA2smkqDqAyOuwpjLMJjf6fKJCHU",
+    "SECRET_KEY",
+    default="mysecretkey",
 )
+print(SECRET_KEY)
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 
@@ -52,3 +53,14 @@ INSTALLED_APPS += ["django_extensions"]  # noqa F405
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+DATABASES= {}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env("DB_NAME"),
+        'USER': env("DB_USER"),
+        'PASSWORD': env("DB_PASSWORD"),
+        'HOST': env("DATABASE_HOST"),
+        'PORT': '3306',
+    }
+}

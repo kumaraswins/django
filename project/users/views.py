@@ -15,56 +15,54 @@ from . import models, serializers
 User = get_user_model()
 
 
-class UserDetailView(LoginRequiredMixin, DetailView):
+# class UserDetailView(LoginRequiredMixin, DetailView):
 
-    model = User
-    slug_field = "username"
-    slug_url_kwarg = "username"
-
-
-user_detail_view = UserDetailView.as_view()
+#     model = User
+#     slug_field = "username"
+#     slug_url_kwarg = "username"
 
 
-class UserUpdateView(LoginRequiredMixin, UpdateView):
-
-    model = User
-    fields = ["name"]
-
-    def get_success_url(self):
-        return reverse("users:detail", kwargs={"username": self.request.user.username})
-
-    def get_object(self):
-        return User.objects.get(username=self.request.user.username)
-
-    def form_valid(self, form):
-        messages.add_message(
-            self.request, messages.INFO, _("Infos successfully updated")
-        )
-        return super().form_valid(form)
+# user_detail_view = UserDetailView.as_view()
 
 
-user_update_view = UserUpdateView.as_view()
+# class UserUpdateView(LoginRequiredMixin, UpdateView):
+
+#     model = User
+#     fields = ["name"]
+
+#     def get_success_url(self):
+#         return reverse("users:detail", kwargs={"username": self.request.user.username})
+
+#     def get_object(self):
+#         return User.objects.get(username=self.request.user.username)
+
+#     def form_valid(self, form):
+#         messages.add_message(
+#             self.request, messages.INFO, _("Infos successfully updated")
+#         )
+#         return super().form_valid(form)
 
 
-class UserRedirectView(LoginRequiredMixin, RedirectView):
-
-    permanent = False
-
-    def get_redirect_url(self):
-        return reverse("users:detail", kwargs={"username": self.request.user.username})
+# user_update_view = UserUpdateView.as_view()
 
 
-user_redirect_view = UserRedirectView.as_view()
+# class UserRedirectView(LoginRequiredMixin, RedirectView):
+
+#     permanent = False
+
+#     def get_redirect_url(self):
+#         return reverse("users:detail", kwargs={"username": self.request.user.username})
+
+
+# user_redirect_view = UserRedirectView.as_view()
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = models.Company.objects.all()
     serializer_class = serializers.CompanySerializer
-    # lookup_field = 'name'
+    
 
-
-@api_view(http_method_names=['GET'])
-def all_visits(request):
-    company = models.Company.objects.all()
-    serialized_company = {"data": serializers.CompanySerializer(company, many=True).data}
-    return JsonResponse(serialized_company, safe=False)
+class MemberViewSet(viewsets.ModelViewSet):
+    queryset = models.Member.objects.all()
+    serializer_class = serializers.MemberSerializer
+    

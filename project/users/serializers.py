@@ -12,3 +12,9 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Company
         fields = ('id', 'name', 'location',)
+
+
+class MemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Member
+        fields = '__all__'

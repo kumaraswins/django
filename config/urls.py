@@ -8,32 +8,29 @@ from rest_framework import routers
 from rest_framework.authtoken import views
 from django.urls import  re_path,path
 from project.users import views as mu_views
+from rest_framework_jwt.views import obtain_jwt_token
 
 from django.views.generic import RedirectView
 from django.views.decorators.csrf import csrf_exempt
 
 router = routers.DefaultRouter()
 
-router = routers.DefaultRouter()
 router.register(r'companies', mu_views.CompanyViewSet)
-
+router.register(r'member', mu_views.MemberViewSet)
 
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
-    # User management
-    # Your stuff: custom urls includes go here
+    path('', include(router.urls)),
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api-token-auth/', views.obtain_auth_token),
+    url(r'^api-token-auth/', obtain_jwt_token),
     re_path(r'^$', RedirectView.as_view(url='admin/', permanent=True)),
-    #url(r'^api/company/$', mu_views.get_company, name='get_company'),
-    url(r'^api/company/$', (mu_views.all_visits))
-    #re_path('^visits$', views.all_visits),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+print("")
+print("settings.DEBUG", settings.DEBUG)
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
