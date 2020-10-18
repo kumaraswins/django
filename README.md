@@ -68,6 +68,14 @@ python3 manage.py runserver --settings=config.settings.local
 
 ---
 
+# Running Test Cases
+
+5 test cases for create read update and deleting the enry
+
+```bash
+python manage.py test --settings=config.settings.local
+```
+
 # API documentation
 
 ### 1. Create new entry
@@ -165,3 +173,9 @@ curl --request PUT 'http://localhost:8000/member/2/' \
 curl --request DELETE 'http://localhost:8000/member/1/' \
 --header 'Content-Type: application/json'
 ```
+
+---
+
+## Acknowledgements
+
+[Django cookie cutter](https://github.com/pydanny/cookiecutter-django)

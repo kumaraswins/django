@@ -72,4 +72,3 @@ class MemberTest(TestCase):
     def test_del(self):
         models.Member.objects.filter(phone="9887098870").delete()
         self.assertEqual(models.Member.objects.count(), 1)
-
