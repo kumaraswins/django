@@ -7,13 +7,6 @@ from project.users.models import User
 from django.conf import settings
 
 
-
-class CompanySerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = models.Company
-        fields = ('id', 'name', 'location',)
-
-
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Member

@@ -5,7 +5,7 @@ read username
 echo "Give your root paasword"
 read -s rootpass
 
-DB_NAME="insta_work_django"
+DB_NAME="instawork_django_1"
 DB_PASS="effb2ac6d4c7"
 if [[ $rootpass ]]; then
     # create db

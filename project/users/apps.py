@@ -5,9 +5,4 @@ class UsersConfig(AppConfig):
     name = "project.users"
     verbose_name = _("Users")
 
-    def ready(self):
-        try:
-            import project.users.signals  # noqa F401
-        except ImportError:
-            pass
 
