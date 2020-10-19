@@ -1,6 +1,4 @@
-# InstaWork API docs
-
-### Tech Used
+# Tech Used
 
 1. Python3
 2. DB Mysql
@@ -175,6 +173,23 @@ curl --request DELETE 'http://localhost:8000/member/1/' \
 ```
 
 ---
+
+# Test Cases Covered
+
+1. Create Entries - Creates 2 entry and check for the count
+2. Filtering / querying -  Filtering and check for the data validity.
+3. Editing - Query particular data and change any one of the fields and check for the same
+4. Delete -  Delete particular entry and check the count after deleting
+
+---
+
+# Note
+
+All the development were done in 
+
+1. Ubuntu 20
+2. python - 3.8
+3. Mysql -  8.0.21
 
 ## Acknowledgements
 

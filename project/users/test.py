@@ -1,12 +1,8 @@
-print("testings")
-
 from django.test import TestCase
 from django.test import Client
 from . import models
 
-
 c = Client()
-
 
 def test_get_api(url):
     response = c.get(all_member)
