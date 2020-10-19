@@ -87,13 +87,13 @@ curl --location --request POST 'http://localhost:8000/member/' \
     "email":"test@gmail.com",
     "phone":"9884080111",
     "role":"Admin"
-}' | json_pp
+}'
 ```
 
 ### 2. List all the members
 
 ```bash
-curl --request GET 'http://localhost:8000/member/' | json_pp
+curl --request GET 'http://localhost:8000/member/'
 ```
 
 Success response 
@@ -124,7 +124,7 @@ Success response
 ### 3. List specific member
 
 ```bash
-curl --request GET 'http://localhost:8000/member/1' | json_pp
+curl --request GET 'http://localhost:8000/member/1'
 ```
 
 Response
