@@ -18,7 +18,7 @@ coreschema==0.0.4
 coverage==5.0
 decorator==4.4.1
 defusedxml==0.6.0
-Django==2.2.9
+Django==2.2.20
 django-allauth==0.41.0
 django-coverage-plugin==1.6.0
 django-crispy-forms==1.8.1
